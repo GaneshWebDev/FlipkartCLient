@@ -41,7 +41,7 @@ function Kart(){
       }
     const removeProduct=(id)=>{
         console.log(id)
-        axios.delete(`/remove/${id}`).then(res=>{
+        axios.delete(`https://flipkart-backend-iopt.onrender.com/remove/${id}`).then(res=>{
             console.log(res);
             window.location.reload(false);
         }).catch(err=>{
