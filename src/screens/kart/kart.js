@@ -18,7 +18,7 @@ function Kart(){
     useEffect(()=>{
         const savedItem=JSON.parse(localStorage.getItem('persist:root'));
         const id = savedItem.id;
-        axios.get(`https://flipkart-backend-iopt.onrender.com/kartProducts/${id}`).then(res=>{
+        axios.get(`https://flikart-clone-backend.onrender.com/kartProducts/${id}`).then(res=>{
             const arr=res.data.products;
             setProductsValue([...arr]);
             console.log(productsValue,'pro');
@@ -30,7 +30,7 @@ function Kart(){
     const addToKart=(product)=>{
         const savedItem=JSON.parse(localStorage.getItem('persist:root'));
         const id = savedItem.id;
-        axios.post('https://flipkart-backend-iopt.onrender.com/kartProduct',{product,id}).then(res=>{
+        axios.post('https://flikart-clone-backend.onrender.com/kartProduct',{product,id}).then(res=>{
           console.log(res);
   
         }).catch(err=>{
@@ -40,7 +40,7 @@ function Kart(){
       const removefromKart=(product)=>{
         const savedItem=JSON.parse(localStorage.getItem('persist:root'));
         const id = savedItem.id;
-        axios.post('https://flipkart-backend-iopt.onrender.com/kartProduct/remove',{product,id}).then(res=>{
+        axios.post('https://flikart-clone-backend.onrender.com/kartProduct/remove',{product,id}).then(res=>{
           console.log(res);
   
         }).catch(err=>{
@@ -49,7 +49,7 @@ function Kart(){
       }
     const removeProduct=(id)=>{
         console.log(id)
-        axios.delete(`https://flipkart-backend-iopt.onrender.com/remove/${id}`).then(res=>{
+        axios.delete(`https://flikart-clone-backend.onrender.com/remove/${id}`).then(res=>{
             console.log(res);
             window.location.reload(false);
         }).catch(err=>{
