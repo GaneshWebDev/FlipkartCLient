@@ -33,7 +33,7 @@ function Profile() {
       <div className='orders'>
         <div>
           <h2>Order History</h2>
-          {orders.items.length>0 ? ( // Check if orders is defined
+          {orders.length>0 ? ( // Check if orders is defined
             <table style={tableStyle}>
               <thead>
                 <tr>
@@ -44,7 +44,7 @@ function Profile() {
                 </tr>
               </thead>
               <tbody>
-                {orders.items.map((item, index) => (
+                {orders.map((item, index) => (
                   <tr key={index} style={trStyle}>
                     <td>{item.Product_Title}</td>
                     <td>{item.Brand}</td>
