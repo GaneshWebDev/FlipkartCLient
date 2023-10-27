@@ -15,7 +15,7 @@ function LoginNew(fun){
     }
     const submitHandler=(data)=>{
         if(registerDiv){
-           axios.post('https://flikart-clone-backend.onrender.com/userSignU',data).then(res=>{
+           axios.post('https://flikart-clone-backend.onrender.com/userSignUp',data).then(res=>{
              console.log(res);
              reset();
            }).catch(err=>{
