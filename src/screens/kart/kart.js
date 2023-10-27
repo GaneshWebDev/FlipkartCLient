@@ -10,7 +10,7 @@ function Kart(){
         setCount(count + 1);
       };
     const decrement = () => {
-        if (count > 1
+        if (count > 0
             ) {
           setCount(count - 1);
         }
@@ -69,7 +69,7 @@ function Kart(){
                  <div className="product-image">
                     <img src={imgs[0]} alt={product.Product_Title}/>
                 </div>
-                  <p className='quantity'><button disabled={product.quantity===1} onClick={()=>{removefromKart(product);decrement()}}>-</button><span className='quantityNum'>{count}</span><button  onClick={()=>{addToKart(product);increment()}}>+</button></p>
+                  <p className='quantity'><button disabled={product.quantity===1} onClick={()=>{removefromKart(product);decrement()}}>-</button><span className='quantityNum'>{product.quantity-1+count}</span><button  onClick={()=>{addToKart(product);increment()}}>+</button></p>
                  <div className="product-details">
                    <h1>{product.Product_Title}</h1>
                    <p>
