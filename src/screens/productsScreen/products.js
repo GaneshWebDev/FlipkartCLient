@@ -8,7 +8,7 @@ function Products({productsValue,fun}){
     const [selectProduct,setSelectProduct]=useState(false);
     console.log(product,selectProduct);
     useEffect(()=>{
-        axios.get('https://flipkart-backend-iopt.onrender.com/products').then(res=>{
+        axios.get('https://flikart-clone-backend.onrender.com/products').then(res=>{
             const arr=res.data.data;
             fun([...arr]);
             setLoading(false);
@@ -19,7 +19,7 @@ function Products({productsValue,fun}){
     const addToKart=(product)=>{
       const savedItem=JSON.parse(localStorage.getItem('persist:root'));
       const id = savedItem.id;
-      axios.post('https://flipkart-backend-iopt.onrender.com/kartProduct',{product,id}).then(res=>{
+      axios.post('https://flikart-clone-backend.onrender.com/kartProduct',{product,id}).then(res=>{
         console.log(res);
 
       }).catch(err=>{
