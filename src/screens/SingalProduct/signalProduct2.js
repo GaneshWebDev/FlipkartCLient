@@ -40,7 +40,7 @@ function SignalProduct({productsValue}){
           }
           console.log({item,images});
         }else if(from === 'kart'){
-            axios.get(`/kartProduct/${id}`).then(res=>{
+            axios.get(`https://flipkart-backend-iopt.onrender.com/kartProduct/${id}`).then(res=>{
                 setItem(res.data[0]);
                 const imageString=res.data[0].Image_Url
                 console.log({imageString})
@@ -64,7 +64,7 @@ function SignalProduct({productsValue}){
             user_id:userId,
         }
         console.log(product);
-         axios.post('/Buy/product',{product}).then(res=>{
+         axios.post('https://flipkart-backend-iopt.onrender.com/Buy/product',{product}).then(res=>{
             const orders={
                 orders:res.data.user.orders.items
             }
