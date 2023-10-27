@@ -15,7 +15,7 @@ function LoginNew(fun){
     }
     const submitHandler=(data)=>{
         if(registerDiv){
-           axios.post('https://flipkart-backend-iopt.onrender.com/userSignU',data).then(res=>{
+           axios.post('https://flikart-clone-backend.onrender.com/userSignU',data).then(res=>{
              console.log(res);
              reset();
            }).catch(err=>{
@@ -23,7 +23,7 @@ function LoginNew(fun){
            });
           
         }else{
-            axios.post('https://flipkart-backend-iopt.onrender.com/userSignIn',data).then(res=>{
+            axios.post('https://flikart-clone-backend.onrender.com/userSignIn',data).then(res=>{
              console.log(res,'log');
              dispatch(userLogin({ id: res.data.data.id, email: res.data.data.email, orders:res.data.data.orders}));
            }).catch(err=>{
