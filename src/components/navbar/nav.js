@@ -14,8 +14,8 @@ function Nav({loginFun,fun}){
   const user=useSelector(state=>state.log1.user);
   const handleSearch=()=>{
      axios.get(`https://flikart-clone-backend.onrender.com/products/search?product=${search}`).then(res=>{
-      console.log(res.data);
-      const arr=res.data;
+      console.log(res.data.data);
+      const arr=res.data.data;
       fun([...arr]);
      }).catch(err=>{
       console.log(err);
