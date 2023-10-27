@@ -13,7 +13,7 @@ function Nav({loginFun,fun}){
   const [search,setSearch]=useState('');
   const user=useSelector(state=>state.log1.user);
   const handleSearch=()=>{
-     axios.get(`https://flipkart-backend-iopt.onrender.com/product?product=${search}`).then(res=>{
+     axios.get(`https://flipkart-backend-iopt.onrender.com/products/search?product=${search}`).then(res=>{
       console.log(res.data);
       const arr=res.data;
       fun([...arr]);
