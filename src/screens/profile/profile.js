@@ -19,8 +19,9 @@ function Profile() {
      const storedData = localStorage.getItem('persist:root');
      const user = JSON.parse(storedData);
      const orders = JSON.parse(user.orders);
+     console.log({orders})
   },[]);
- console.log({orders})
+
   const logout = () => {
     dispatch(userLogout());
     window.location.href = '/';
