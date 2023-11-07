@@ -51,6 +51,8 @@ function Kart(){
         console.log(id)
         axios.delete(`https://flikart-clone-backend.onrender.com/remove/${id}`).then(res=>{
             console.log(res);
+             const savedItem=JSON.parse(localStorage.getItem('persist:root'));
+             const id = savedItem.id;
              axios.get(`https://flikart-clone-backend.onrender.com/kartProducts/${id}`).then(res=>{
             const arr=res.data.products;
             setProductsValue([...arr]);
