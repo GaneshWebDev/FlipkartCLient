@@ -50,7 +50,7 @@ function Kart(){
     const removeProduct=(id)=>{
         console.log(id)
         axios.delete(`https://flikart-clone-backend.onrender.com/remove/${id}`).then(res=>{
-            console.log(res);
+            console.log(res,'correct');
              const savedItem=JSON.parse(localStorage.getItem('persist:root'));
              const id = savedItem.id;
              axios.get(`https://flikart-clone-backend.onrender.com/kartProducts/${id}`).then(res=>{
