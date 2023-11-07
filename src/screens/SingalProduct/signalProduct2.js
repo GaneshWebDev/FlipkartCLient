@@ -64,10 +64,7 @@ function SignalProduct({productsValue}){
             user_id:userId,
         }
         console.log(product);
-         axios.post('https://flikart-clone-backend.onrender.com/Buy/product',{product},{{
-  headers: {
-    'Origin': 'https://flikart-clone-frontend.onrender.com', // Set the origin to your frontend application's URL
-  }}).then(res=>{
+         axios.post('https://flikart-clone-backend.onrender.com/Buy/product',{product}).then(res=>{
             const orders={
                 orders:res.data.user.orders.items
             }
