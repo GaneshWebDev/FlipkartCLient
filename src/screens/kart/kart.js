@@ -1,4 +1,4 @@
-import './kart.css';
+/*import './kart.css';
 import { useEffect,useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -93,4 +93,113 @@ function Kart(){
         </div>
     )
 }
-export default Kart
+export default Kart*/
+import './kart.css';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+function Kart() {
+  const [productsValue, setProductsValue] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [count, setCount] = useState(1);
+
+  const increment = () => {
+    setCount(count + 1);
+  };
+
+  const decrement = () => {
+    if (count > 1) {
+      setCount(count - 1);
+    }
+  };
+
+  useEffect(() => {
+    const savedItem = JSON.parse(localStorage.getItem('persist:root'));
+    const id = savedItem.id;
+    axios.get(`https://flikart-clone-backend.onrender.com/kartProducts/${id}`).then((res) => {
+      const arr = res.data.products;
+      setProductsValue([...arr]);
+      setLoading(false);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }, []);
+
+  const addToKart = (product) => {
+    const savedItem = JSON.parse(localStorage.getItem('persist:root'));
+    const id = savedItem.id;
+
+    // Your server should handle adding the product to the cart
+    axios.post('https://flikart-clone-backend.onrender.com/kartProduct', { product, id }).then((res) => {
+      console.log(res);
+      // You may want to update your local state here as well
+    }).catch((err) => {
+      console.log(err);
+    });
+  };
+
+  const removefromKart = (product) => {
+    const savedItem = JSON.parse(localStorage.getItem('persist:root'));
+    const id = savedItem.id;
+
+    // Your server should handle removing the product from the cart
+    axios.post('https://flikart-clone-backend.onrender.com/kartProduct/remove', { product, id }).then((res) => {
+      console.log(res);
+      // You may want to update your local state here as well
+    }).catch((err) => {
+      console.log(err);
+    });
+  };
+
+  const removeProduct = (id) => {
+    axios.delete(`https://flikart-clone-backend.onrender.com/remove/${id}`).then((res) => {
+      console.log(res);
+      window.location.reload(false);
+    }).catch((err) => {
+      console.log(err);
+    });
+  };
+
+  return (
+    <div className="kart">
+      <h1>Kart Products</h1>
+      <div className='productsView'>
+        {loading ? <h1>Loading...</h1> : (productsValue.map(product => {
+          const imgs = product.Image_Url[0].split('|');
+          return (
+            <div className="product-container" key={product._id}>
+              <div className="product-image">
+                <img src={imgs[0]} alt={product.Product_Title} />
+              </div>
+              <p className='quantity'>
+                <button disabled={product.quantity === 1} onClick={() => { removefromKart(product); decrement(); }}>-</button>
+                <span className='quantityNum'>{product.quantity - 1 + count}</span>
+                <button onClick={() => { addToKart(product); increment(); }}>+</button>
+              </p>
+              <div className="product-details">
+                <h1>{product.Product_Title}</h1>
+                <p>
+                  <strong>Brand:</strong> {product.Brand}
+                </p>
+                <p>
+                  <strong>Retail Price:</strong> ₹{product.Mrp * product.quantity - product.Mrp}
+                </p>
+                <p>
+                  <strong>Discounted Price:</strong> ₹{product.Price * product.quantity - product.Price}
+                </p>
+                <div className='btn'>
+                  <button id='remove' onClick={() => removeProduct(product._id)}>Remove from Kart</button>
+                  <Link to={`/product/${product.Uniq_Id}/${'kart'}`}><button id='buy'>Buy Now</button></Link>
+                </div>
+              </div>
+            </div>
+          );
+        }))}
+      </div>
+    </div>
+  );
+}
+
+export default Kart;
+
