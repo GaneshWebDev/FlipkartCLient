@@ -37,6 +37,7 @@ function Kart(){
         })
       }
       const removefromKart=(product)=>{
+        if(product.quantity-1>1){
         const savedItem=JSON.parse(localStorage.getItem('persist:root'));
         const id = savedItem.id;
         axios.post('https://flikart-clone-backend.onrender.com/kartProduct/remove',{product,id}).then(res=>{
@@ -54,6 +55,7 @@ function Kart(){
         }).catch(err=>{
           console.log(err);
         })
+        }
       }
     const removeProduct=(id)=>{
         console.log(id)
