@@ -158,6 +158,7 @@ function Kart() {
        axios.get(`https://flikart-clone-backend.onrender.com/kartProducts/${id}`).then((res) => {
       const arr = res.data.products;
       setProductsValue([...arr]);
+      console.log(arr);
       setLoading(false);
     }).catch((err) => {
       console.log(err);
