@@ -49,7 +49,7 @@ function SignalProduct({productsValue}){
                     console.log(imagesUrls);
                     setImages(imagesUrls);
                   }
-                  console.log(images);
+                  console.log(images,'images');
             }).catch(err=>{
                 console.log(err);
             })
