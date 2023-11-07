@@ -1,7 +1,7 @@
 import './profile.css';
 import { useDispatch } from 'react-redux';
 import { userLogout } from '../../feathers/userSlice';
-import {useEffect,useState} from 'react';
+import { useEffect,useState } from 'react';
 const tableStyle = {
   width: '100%',
   borderCollapse: 'collapse',
