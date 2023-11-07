@@ -1,7 +1,6 @@
 import './profile.css';
 import { useDispatch } from 'react-redux';
 import { userLogout } from '../../feathers/userSlice';
-import { useEffect,useState } from 'react';
 const tableStyle = {
   width: '100%',
   borderCollapse: 'collapse',
@@ -15,14 +14,11 @@ const trStyle = {
 
 function Profile() {
   const dispatch = useDispatch();
-  const [orders,setOrders]=useState([]);
-  useEffect(()=>{
-     const storedData = localStorage.getItem('persist:root');
-     const user = JSON.parse(storedData);
-     const orders = JSON.parse(user.orders);
-     setOrders([orders]);
-     console.log({orders})
-  },[]);
+  const storedData = localStorage.getItem('persist:root');
+  const user = JSON.parse(storedData);
+  const orders = JSON.parse(user.orders);
+  console.log({orders})
+ 
 
   const logout = () => {
     dispatch(userLogout());
