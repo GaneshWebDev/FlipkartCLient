@@ -5,16 +5,6 @@ import axios from 'axios';
 function Kart(){
     const [productsValue,setProductsValue]=useState([]);
     const [loading, setLoading] = useState(true);
-     const [count, setCount] = useState(1);
-    const increment = () => {
-        setCount(count + 1);
-      };
-    const decrement = () => {
-        if (count > 0
-            ) {
-          setCount(count - 1);
-        }
-    }
     useEffect(()=>{
         const savedItem=JSON.parse(localStorage.getItem('persist:root'));
         const id = savedItem.id;
@@ -32,7 +22,16 @@ function Kart(){
         const id = savedItem.id;
         axios.post('https://flikart-clone-backend.onrender.com/kartProduct',{product,id}).then(res=>{
           console.log(res);
-  
+           const savedItem=JSON.parse(localStorage.getItem('persist:root'));
+             const id = savedItem.id;
+             axios.get(`https://flikart-clone-backend.onrender.com/kartProducts/${id}`).then(res=>{
+            const arr=res.data.products;
+            setProductsValue([...arr]);
+            console.log(productsValue,'product');
+            setLoading(false);
+        }).catch(err=>{
+            console.log(err);
+        })
         }).catch(err=>{
           console.log(err);
         })
@@ -42,7 +41,16 @@ function Kart(){
         const id = savedItem.id;
         axios.post('https://flikart-clone-backend.onrender.com/kartProduct/remove',{product,id}).then(res=>{
           console.log(res);
-  
+          const savedItem=JSON.parse(localStorage.getItem('persist:root'));
+          const id = savedItem.id;
+          axios.get(`https://flikart-clone-backend.onrender.com/kartProducts/${id}`).then(res=>{
+            const arr=res.data.products;
+            setProductsValue([...arr]);
+            console.log(productsValue,'product');
+            setLoading(false);
+        }).catch(err=>{
+            console.log(err);
+        })
         }).catch(err=>{
           console.log(err);
         })
@@ -78,7 +86,7 @@ function Kart(){
                  <div className="product-image">
                     <img src={imgs[0]} alt={product.Product_Title}/>
                 </div>
-                  <p className='quantity'><button disabled={product.quantity===1} onClick={()=>{removefromKart(product);decrement()}}>-</button><span className='quantityNum'>{product.quantity-1+count}</span><button  onClick={()=>{addToKart(product);increment()}}>+</button></p>
+                  <p className='quantity'><button disabled={product.quantity===1} onClick={()=>{removefromKart(product)}}>-</button><span className='quantityNum'>{product.quantity-1}</span><button  onClick={()=>{addToKart(product)}}>+</button></p>
                  <div className="product-details">
                    <h1>{product.Product_Title}</h1>
                    <p>
