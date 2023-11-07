@@ -20,7 +20,7 @@ function Profile() {
      const storedData = localStorage.getItem('persist:root');
      const user = JSON.parse(storedData);
      const orders = JSON.parse(user.orders);
-     setOrders([...orders]);
+     setOrders([orders]);
      console.log({orders})
   },[]);
 
